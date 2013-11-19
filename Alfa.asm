@@ -83,6 +83,10 @@ section .bss
 	buffer2 resb buflen
 	buffer3 resb buflen
 	buffer4 resb buflen
+
+	SubC1 resb buflen
+	SubC2 resb buflen
+
 	buflen equ 25
 	lineaC equ 40
 	
@@ -94,8 +98,7 @@ section .bss
 	caracter resb buflen2
 
 
-	SubC1 resb buflen3
-	SubC2 resb buflen3
+
 	
 	ayChar resb buflen3
 	char1 resb buflen2
@@ -435,6 +438,8 @@ Comparar:
 	mov esi, 1		;Se le mueve un 1(Se va a usar como contador de lineas mas adelante)
 	xor ebp, ebp
 	mov ebp, 1
+	xor ebx, ebx
+	xor ecx, ecx
 	mov byte[SubC1], 1   ;Es el contador de lineas del primer archivo en comparar.
 	mov byte[SubC2], 1	;Es el contador de lineas del segundo archivo en comparar.
 	call LimpiarP
@@ -448,11 +453,13 @@ Comparar:
 		jg .leermas2
 		jmp Error
 	.leer:
+
 		mov eax, 3
 		mov ebx, [fd1]
 		mov ecx, char1
 		mov edx, buflen2
 		int 80h
+
 
 		test eax, eax
 		jz Limpiar
@@ -466,12 +473,13 @@ Comparar:
 	.tsuju:
 
 	.leer2:
-
+	
 		mov eax, 3
 		mov ebx, [fd2]
 		mov ecx, char2
 		mov edx, buflen2
 		int 80h
+	
 
 		test eax, eax
 		jz Limpiar
@@ -494,17 +502,14 @@ Comparar:
 		je .leer
 
 	.noI:
-
-		call LimpiarP
-
 		mov ecx, origen
 		mov edx, buflen
 		call Print
-
+	
 		mov ecx, dosp
 		mov edx, dosplen
 		call Print
-
+		
 		mov eax, esi
 		mov edi, buffer
 		call Itoa
@@ -513,11 +518,11 @@ Comparar:
 		mov ecx, buffer
 		call Print
 
+
 		mov edx, puntolen
 		mov ecx, punto
 		call Print
 		
-		call LimpiarP
 
 		mov eax, [SubC1]
 		mov edi, buffer
@@ -526,45 +531,45 @@ Comparar:
 		mov edx, eax
 		mov ecx, buffer
 		call Print
-
+	
 		mov ecx, coma
 		mov edx, colen
 		call Print
-
+	
 		mov ecx, destino
 		mov edx, buflen
 		call Print
-
+		
 		mov ecx, dosp
 		mov edx, dosplen
 		call Print
+		
 
 		mov eax, ebp
-		mov edi, buffer2
+		mov edi, buffer
 		call Itoa
-
+	
 		mov edx, eax
-		mov ecx, buffer2
+		mov ecx, buffer
 		call Print
-
-
+	
 		mov edx, puntolen
 		mov ecx, punto
 		call Print
 
-		call LimpiarP
 
 		mov eax, [SubC2]
 		mov edi, buffer
 		call Itoa
-		
+	
 		mov edx, eax
 		mov ecx, buffer
 		call Print
-
+		
 		mov edx, nlen
 		mov ecx, nl
 		call Print
+
 
 		jmp .Preguntar
 
@@ -574,7 +579,7 @@ Comparar:
 
 		cmp esi, ebp
 		je .Preguntar
-
+		
 		mov eax, 3
 		mov ebx, [fd1]
 		mov ecx, char1
@@ -597,17 +602,14 @@ Comparar:
 		inc byte[SubC1]
 
 	.imprimirmas:
-
-	        call LimpiarP
-	
 		mov ecx, origen
 		mov edx, buflen
 		call Print
-
+	
 		mov ecx, dosp
 		mov edx, dosplen
 		call Print
-
+		
 		mov eax, esi
 		mov edi, buffer
 		call Itoa
@@ -620,8 +622,7 @@ Comparar:
 		mov edx, puntolen
 		mov ecx, punto
 		call Print
-
-		call LimpiarP
+		
 
 		mov eax, [SubC1]
 		mov edi, buffer
@@ -630,49 +631,46 @@ Comparar:
 		mov edx, eax
 		mov ecx, buffer
 		call Print
-
+	
 		mov ecx, coma
 		mov edx, colen
 		call Print
-
+	
 		mov ecx, destino
 		mov edx, buflen
 		call Print
-
+		
 		mov ecx, dosp
 		mov edx, dosplen
 		call Print
-
-		call LimpiarP
+		
 
 		mov eax, ebp
 		mov edi, buffer
 		call Itoa
-
+	
 		mov edx, eax
 		mov ecx, buffer
 		call Print
-
-
+	
 		mov edx, puntolen
 		mov ecx, punto
 		call Print
 
-		call LimpiarP
 
 		mov eax, [SubC2]
 		mov edi, buffer
 		call Itoa
-		
+	
 		mov edx, eax
 		mov ecx, buffer
 		call Print
-
-		mov ecx, nl
+		
 		mov edx, nlen
+		mov ecx, nl
 		call Print
-		jmp .leermas
 
+		jmp .leermas
 
 
 	.leermas2:
@@ -685,6 +683,7 @@ Comparar:
 		mov ecx, char2
 		mov edx, buflen2
 		int 80h
+
 		
 	
 		test eax, eax
@@ -703,9 +702,6 @@ Comparar:
 		inc byte[SubC2]
 
 	.imprimirmas2:
-
-		call LimpiarP
-
 		mov ecx, origen
 		mov edx, buflen
 		call Print
@@ -713,7 +709,6 @@ Comparar:
 		mov ecx, dosp
 		mov edx, dosplen
 		call Print
-
 
 		mov eax, esi
 		mov edi, buffer
@@ -723,14 +718,10 @@ Comparar:
 		mov ecx, buffer
 		call Print
 
-
-		
-
 		mov edx, puntolen
 		mov ecx, punto
 		call Print
-
-		call LimpiarP
+	
 
 		mov eax, [SubC1]
 		mov edi, buffer
@@ -744,39 +735,43 @@ Comparar:
 		mov edx, colen
 		call Print
 
+		push ecx
 		mov ecx, destino
 		mov edx, buflen
 		call Print
+		pop ecx
 
+		push ecx
 		mov ecx, dosp
 		mov edx, dosplen
 		call Print
+		pop ecx
 
 		mov eax, ebp
-		mov edi, buffer
+		mov edi, buffer2
 		call Itoa
-
+	
 		mov edx, eax
-		mov ecx, buffer
+		mov ecx, buffer2
 		call Print
-
+	
 		mov edx, puntolen
 		mov ecx, punto
 		call Print
 
-
-		call LimpiarP
+		
 
 		mov eax, [SubC2]
 		mov edi, buffer
 		call Itoa
+
 		
 		mov edx, eax
 		mov ecx, buffer
 		call Print
 
-		mov ecx, nl
 		mov edx, nlen
+		mov ecx, nl
 		call Print
 		jmp .leermas2
 
@@ -1324,8 +1319,9 @@ LimpiarP:
 	ret
 
 Print:
-
+	push ebx 
 	mov eax, 4
 	mov ebx, 1
 	int 80h
+	pop ebx
 	ret

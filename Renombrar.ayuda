@@ -1,0 +1,11 @@
+Renombrar:
+
+	Le cambia el nombre a un archivo.
+
+Sintaxis:
+
+	cdi»Renombrar [--ayuda] nombre-archivo-original nombre-archivo-nuevo [--forzado]
+
+	Recibe como argumentos el nombre del archivo original y el nombre que se
+	le desea dar.
+	Usar --forzado para evitar la pregunta de seguridad.

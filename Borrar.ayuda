@@ -1,0 +1,11 @@
+Borrar:
+
+	Elimina Un archivo
+
+Sintaxis:
+
+	cdi»Borrar [--ayuda] nombre-archivo [--forzado]
+
+	Recibe como parámetro el nombre de un archivo y lo 
+	elimina del sistema.
+	Usar --forzado para evitar la pregunta de seguridad.

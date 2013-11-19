@@ -1,0 +1,10 @@
+Copiar:
+
+	Copia el contenido de un archivo en otro nuevo.
+
+Sintaxis:
+
+	cdi»Copiar [--ayuda] nombre-archivo-original nombre-archivo-nuevo 
+
+	Los argumentos del programa son, el nombre del archivo que será 
+	copiado y el nombre que tendrá el nuevo archivo por crear.

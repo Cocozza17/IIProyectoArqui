@@ -1,0 +1,11 @@
+Comparar:
+
+	Toma dos archivos y loscompara línea por línea
+
+Sintaxis:
+
+	cdi»Comparar [--ayuda] nombre-archivo-1 nombre-archivo-2 
+
+	Dados dos nombres de archivo existentes, loscompara líneapor línea
+	mostrando como sallida los números de línea donde los archivos son 
+	diferentes.

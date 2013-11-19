@@ -1,0 +1,10 @@
+Mostrar:
+
+	Muestra en la salida estándar el contenido de un archivo.
+
+Sintaxis:
+
+	cdi»Mostrar [--ayuda] nombre-archivo 
+
+	Recibe como parámetro el nombre de un archivo, cuyo contenido
+	será desplegado en la pantalla (sálida estándar)
